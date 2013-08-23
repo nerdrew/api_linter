@@ -1,0 +1,7 @@
+curl -i -H 'Content-Type: application/json' <%= req_headers %><%= auth %>-X POST http://localhost:3000<%= route %> -d '
+<%= JSON.pretty_generate sample_request_params %>
+'
+
+HTTP/1.1 <%= status %> <%= Rack::Utils::HTTP_STATUS_CODES[status] %>
+<%= res_headers %>
+<%= JSON.pretty_generate sample_response_params %>

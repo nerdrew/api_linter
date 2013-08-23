@@ -1,0 +1,20 @@
+## <%= title %>
+<%= description %>
+### Request
+
+#### Body
+```json
+<%= JSON.pretty_generate generate_documentation(request_params) %>
+```
+
+### Response
+
+#### Body
+```json
+<%= JSON.pretty_generate generate_documentation(response_params) %>
+```
+
+Examples:
+```
+<%= samples.map(&:document).join "\n\n" %>
+```
