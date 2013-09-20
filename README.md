@@ -1,6 +1,11 @@
-# ApiLinter
+# APILinter
 
-TODO: Write a gem description
+Ruby HTTP API linter for Rack apps.
+
+Install the middleware, specify the request and response formats, and let 'er rip. All requests
+and responses that do not conform to the API will be flagged (logged or raised). From the request
+and response formats, combined with your integration tests, generate API documention complete with
+runnable curl examples.
 
 ## Installation
 
