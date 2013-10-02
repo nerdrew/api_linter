@@ -6,7 +6,6 @@ require "api_linter/version"
 require 'api_linter/key'
 require 'api_linter/sample'
 require 'api_linter/linter'
-require 'api_linter/documenter'
 require 'api_linter/lint_middleware'
 
 module APILinter
