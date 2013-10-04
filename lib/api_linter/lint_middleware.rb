@@ -18,8 +18,13 @@ module APILinter
         request_params = parse_request_params request
         response_params = parse_response_params headers, body
 
-        linter.check request.headers, request_params, status, headers, response_params,
-          description: APILinter::Config.description, document: APILinter::Config.document?,
+        linter.check sample_request_headers: {},
+          sample_request_params: request_params,
+          status: status,
+          sample_response_headers: headers,
+          sample_response_params: response_params,
+          description: APILinter::Config.description,
+          document: APILinter::Config.document?,
           strict: APILinter::Config.strict?
       end
 

@@ -21,6 +21,7 @@ if defined? RSpec
     config.after(:all) do
       puts "\n\n"
       puts "Documentation written to: doc/README.md"
+      puts APILinter::Linter.document
       documentation.rewind
       puts documentation.read
       lint_output.rewind

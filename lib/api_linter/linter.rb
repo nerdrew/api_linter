@@ -70,6 +70,12 @@ module APILinter
 
     private
 
+    def document_samples
+      samples.map do |sample|
+        sample.document method, route
+      end.join "\n\n"
+    end
+
     def formatted_request_headers
       request_headers.map do |key, value|
         "#{key}: #{value}"

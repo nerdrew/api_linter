@@ -1,26 +1,26 @@
 module APILinter
   class Sample
-    attr_accessor :sample_request_params, :sample_response_params,
-      :status, :sample_request_headers, :sample_response_headers,
-      :description
-
     attr_writer :document, :strict
 
     attr_reader :missing_request_params, :unpermitted_request_params, :request_type_mismatches,
-      :missing_response_params, :unpermitted_response_params, :response_type_mismatches
-
+      :missing_response_params, :unpermitted_response_params, :response_type_mismatches,
+      :sample_request_params, :sample_response_params,
+      :sample_request_headers, :sample_response_headers,
+      :status, :description
 
     def initialize(options = {})
-      request_params = options.delete(:request_params) || {}
-      response_params = options.delete(:response_params) || {}
+      @sample_request_params = options[:sample_request_params] || {}
+      @sample_response_params = options[:sample_response_params] || {}
+      @sample_request_headers = options[:sample_request_headers] || {}
+      @sample_response_headers = options[:sample_response_headers] || {}
+      @status = options[:status]
+      @description = options[:description]
       # TODO header linting
       #request_headers = options.delete(:request_headers) || {}
       #response_headers = options.delete(:response_headers) || {}
 
-      options.each do |key, value|
-        send "#{key}=", value
-      end
-
+      request_params = options[:request_params] || {}
+      response_params = options[:response_params] || {}
       @missing_request_params, @unpermitted_request_params, @request_type_mismatches =
         lint_hash(sample_request_params, request_params)
       @missing_response_params, @unpermitted_response_params, @response_type_mismatches =
@@ -44,7 +44,7 @@ module APILinter
         @response_type_mismatches.empty?
     end
 
-    def document(method, route, username, password)
+    def document(method, route, username = nil, password = nil)
       # TODO only shows a basic auth sample
       if username && password
         auth = "-u '#{username}:#{password}' "
