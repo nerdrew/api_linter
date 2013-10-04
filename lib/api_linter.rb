@@ -17,7 +17,7 @@ module APILinter
     end
 
     def self.output
-      @output ||= File.open(File::NULL, 'w')
+      @output ||= $stdout
     end
 
     def self.lint_output

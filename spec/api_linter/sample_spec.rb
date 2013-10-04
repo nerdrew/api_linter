@@ -1,6 +1,29 @@
 require 'spec_helper'
 
 describe APILinter::Sample do
+  describe '#results' do
+    let(:sample) { APILinter::Sample.new({}) }
+
+    it 'returns a formatted string with the request / response problems' do
+      sample.stub(:missing_request_params) { 'missing request' }
+      sample.stub(:missing_response_params) { 'missing response' }
+      sample.stub(:unpermitted_request_params) { 'unpermitted request' }
+      sample.stub(:unpermitted_response_params) { 'unpermitted response' }
+      sample.stub(:request_type_mismatches) { 'bad request type' }
+      sample.stub(:response_type_mismatches) { 'bad response type' }
+
+      sample.results.should == <<-RESULTS.gsub(/^ {8}/, '')
+        Missing request params: missing request
+        Unpermitted request params: unpermitted request
+        Request type mismatches: bad request type
+
+        Missing response params: missing response
+        Unpermitted response params: unpermitted response
+        Request type mismatches: bad response type
+      RESULTS
+    end
+  end
+
   describe '#request_passed?' do
     it 'returns true if there are no missing, unpermitted, or type mismatches' do
       APILinter::Sample.new({}).request_passed?.should == true
