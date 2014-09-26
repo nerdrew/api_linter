@@ -35,6 +35,8 @@ describe APILinter::Linter do
     end
   end
 
+  # TODO .results spec
+
   describe '#route_regex' do
     it 'returns a regex built from the route' do
       APILinter::Linter.new('GET /bam/:foo/hard', {}).route_regex.

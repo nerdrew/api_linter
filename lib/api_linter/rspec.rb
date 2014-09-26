@@ -2,6 +2,7 @@ if defined? RSpec
   RSpec.configure do |config|
     config.treat_symbols_as_metadata_keys_with_true_values = true
 
+    # TODO do the output streams need to be configurable?
     documentation = StringIO.new
     lint_output = StringIO.new
 
@@ -18,6 +19,8 @@ if defined? RSpec
       end
     end
 
+    # TODO instead of configurable output streams, just write everything to doc/<file>
+    # TODO put each route into it's own file?
     config.after(:all) do
       puts "\n\n"
       puts "Documentation written to: doc/README.md"
