@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'api_linter/linter'
 
 describe APILinter::Linter do
   before { APILinter::Linter.clear }

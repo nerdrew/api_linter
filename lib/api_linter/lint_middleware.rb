@@ -1,5 +1,3 @@
-require 'yajl/json_gem'
-
 module APILinter
   class LintMiddleware
 

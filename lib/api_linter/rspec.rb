@@ -1,3 +1,45 @@
+require 'api_linter/linter'
+require 'api_linter/lint_middleware'
+
+module APILinter
+  module Config
+    class <<self
+      attr_writer :output, :documentation, :lint_output, :strict
+      attr_reader :description
+      attr_accessor :username, :password
+    end
+
+    def self.output
+      @output ||= $stdout
+    end
+
+    def self.lint_output
+      @lint_output || output
+    end
+
+    def self.documentation
+      @documentation || output
+    end
+
+    def self.strict?
+      @strict == true
+    end
+
+    def self.document(description = nil)
+      @description = description
+      @document = true
+      yield
+    ensure
+      @document = false
+      @description = nil
+    end
+
+    def self.document?
+      @document == true
+    end
+  end
+end
+
 if defined? RSpec
   RSpec.configure do |config|
     config.treat_symbols_as_metadata_keys_with_true_values = true

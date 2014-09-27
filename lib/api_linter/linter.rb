@@ -1,3 +1,6 @@
+require 'api_linter/key'
+require 'api_linter/sample'
+
 module APILinter
   class Linter
     def self.clear
@@ -54,7 +57,7 @@ module APILinter
     end
 
     def document
-      description = "\n#{self.description}\n" if self.description
+      description = "\n#{self.description}\n" if self.description # rubocop:disable
       if self.title
         title = "#{self.title}: #{method} #{route}"
       else
@@ -96,7 +99,7 @@ module APILinter
           params[key.extended_name] = value.to_s
         elsif value.nil?
           params[key.extended_name] = 'nil'
-        elsif value.is_a?(Array) && value.all? {|value| Class === value || value.nil? }
+        elsif value.is_a?(Array) && value.all? {|v| Class === v || v.nil? }
           classes = value.map do |klass|
             klass.nil? ? 'nil' : ActiveSupport::Inflector.pluralize(klass.to_s)
           end.join(', ')

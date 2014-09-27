@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'api_linter/key'
 
 describe APILinter::Key do
   describe '#name' do

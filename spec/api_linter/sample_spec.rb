@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'api_linter/sample'
 
 describe APILinter::Sample do
   describe '#results' do
